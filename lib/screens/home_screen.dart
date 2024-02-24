@@ -14,6 +14,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController textController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController tagsController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +48,20 @@ class _HomeScreenState extends State<HomeScreen> {
               hintText: "Enter Video Title",
               maxLength: 100,
               maxLines: 3,
+            ),
+            const SizedBox(height: 40),
+            CustomTextField(
+              controller: descriptionController,
+              hintText: "Enter Video Description",
+              maxLength: 5000,
+              maxLines: 6,
+            ),
+            const SizedBox(height: 40),
+            CustomTextField(
+              controller: tagsController,
+              hintText: "Enter Video Tags",
+              maxLength: 500,
+              maxLines: 4,
             ),
           ],
         ),
