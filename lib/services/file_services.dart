@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class FileService {
@@ -6,4 +8,7 @@ class FileService {
   final TextEditingController tagsController = TextEditingController();
 
   bool fieldsNotEmpty = false;
+
+  File? _selectedField;
+  String _selectedDirectory = "";
 }
