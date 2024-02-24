@@ -13,15 +13,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: AppTheme.dark,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
         child: Column(
           children: [
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 MainButton(text: "New File"),
@@ -38,8 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
-            // CustomTextField(),
+            const SizedBox(height: 20),
+            CustomTextField(
+              controller: textController,
+              hintText: "Enter Video Title",
+              maxLength: 100,
+              maxLines: 3,
+            ),
           ],
         ),
       ),
