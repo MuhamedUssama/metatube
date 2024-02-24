@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:metatube/utils/snakbar_utils.dart';
 
 class FileService {
@@ -24,9 +25,19 @@ class FileService {
     try {
       if (_selectedFile != null) {
         await _selectedFile!.writeAsString(textContent);
+      } else {
+        final todayDate = getTodayDate();
       }
     } catch (e) {
       SnakBarUtils.showSnakbar(context, Icons.error_outline, "File Not Saved");
     }
+  }
+
+  static String getTodayDate() {
+    final now = DateTime.now();
+    final formatter = DateFormat("yyyy-MM-dd");
+    final formattedDate = formatter.format(now);
+
+    return formattedDate;
   }
 }
