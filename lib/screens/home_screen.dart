@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metatube/services/file_services.dart';
 import 'package:metatube/widgets/custom_textfield.dart';
 import 'package:metatube/widgets/icon_button.dart';
 import 'package:metatube/widgets/main_button.dart';
@@ -13,9 +14,51 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController textController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
-  final TextEditingController tagsController = TextEditingController();
+  FileService fileService = FileService();
+
+  @override
+  void initState() {
+    super.initState();
+    addListeners();
+  }
+
+  @override
+  void dispose() {
+    removeListeners();
+    super.dispose();
+  }
+
+  void addListeners() {
+    List<TextEditingController> controllers = [
+      fileService.textController,
+      fileService.descriptionController,
+      fileService.tagsController,
+    ];
+
+    for (TextEditingController controller in controllers) {
+      controller.addListener(_onFieldChanged);
+    }
+  }
+
+  void removeListeners() {
+    List<TextEditingController> controllers = [
+      fileService.textController,
+      fileService.descriptionController,
+      fileService.tagsController,
+    ];
+
+    for (TextEditingController controller in controllers) {
+      controller.removeListener(_onFieldChanged);
+    }
+  }
+
+  void _onFieldChanged() {
+    setState(() {
+      fileService.fieldsNotEmpty = fileService.textController.text.isNotEmpty &&
+          fileService.descriptionController.text.isNotEmpty &&
+          fileService.tagsController.text.isNotEmpty;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,25 +87,31 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 20),
             CustomTextField(
-              controller: textController,
+              controller: fileService.textController,
               hintText: "Enter Video Title",
               maxLength: 100,
               maxLines: 3,
             ),
             const SizedBox(height: 40),
             CustomTextField(
-              controller: descriptionController,
+              controller: fileService.descriptionController,
               hintText: "Enter Video Description",
               maxLength: 5000,
               maxLines: 6,
             ),
             const SizedBox(height: 40),
             CustomTextField(
-              controller: tagsController,
+              controller: fileService.tagsController,
               hintText: "Enter Video Tags",
               maxLength: 500,
               maxLines: 4,
             ),
+            const SizedBox(height: 20),
+            const Row(
+              children: [
+                MainButton(text: "Save File"),
+              ],
+            )
           ],
         ),
       ),
