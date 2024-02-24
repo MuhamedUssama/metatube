@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metatube/services/file_services.dart';
+import 'package:metatube/utils/snakbar_utils.dart';
 import 'package:metatube/widgets/custom_textfield.dart';
 import 'package:metatube/widgets/icon_button.dart';
 import 'package:metatube/widgets/main_button.dart';
@@ -68,11 +69,11 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
         child: Column(
           children: [
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                MainButton(text: "New File"),
-                Row(
+                MainButton(text: "New File", onPressed: () {}),
+                const Row(
                   children: [
                     IconButtonWidget(
                       iconButton: Icons.file_upload,
@@ -107,9 +108,18 @@ class _HomeScreenState extends State<HomeScreen> {
               maxLines: 4,
             ),
             const SizedBox(height: 20),
-            const Row(
+            Row(
               children: [
-                MainButton(text: "Save File"),
+                MainButton(
+                    text: "Save File",
+                    onPressed: fileService.fieldsNotEmpty
+                        ? () => fileService.saveContent(context)
+                        : () {
+                            SnakBarUtils.showSnakbar(
+                                context,
+                                Icons.error_outline,
+                                "Please fill in the blanks");
+                          }),
               ],
             )
           ],
