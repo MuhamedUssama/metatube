@@ -119,7 +119,6 @@ class _HomeScreenState extends State<HomeScreen> {
               maxLength: 500,
               maxLines: 4,
             ),
-            const SizedBox(height: 20),
             Row(
               children: [
                 MainButton(
