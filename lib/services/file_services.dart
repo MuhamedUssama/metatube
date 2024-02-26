@@ -72,13 +72,27 @@ class FileService {
     }
   }
 
-  void newFile(context) async {
+  void newFile(context) {
     _selectedFile = null;
     textController.clear();
     descriptionController.clear();
     tagsController.clear();
 
     SnakBarUtils.showSnakbar(context, Icons.upload_file, "New file created");
+  }
+
+  void newDirectory(context) async {
+    try {
+      String? directory = await FilePicker.platform.getDirectoryPath();
+      _selectedDirectory = directory!;
+      _selectedFile = null;
+
+      SnakBarUtils.showSnakbar(
+          context, Icons.error_outline, "New folder selected");
+    } catch (e) {
+      SnakBarUtils.showSnakbar(
+          context, Icons.error_outline, "No folder selected");
+    }
   }
 
   static String getTodayDate() {
