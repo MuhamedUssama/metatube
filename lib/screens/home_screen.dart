@@ -120,15 +120,14 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               children: [
                 MainButton(
-                    text: "Save File",
-                    onPressed: fileService.fieldsNotEmpty
-                        ? () => fileService.saveContent(context)
-                        : () {
-                            SnakBarUtils.showSnakbar(
-                                context,
-                                Icons.error_outline,
-                                "Please fill in the blanks");
-                          }),
+                  text: "Save File",
+                  onPressed: fileService.fieldsNotEmpty
+                      ? () => fileService.saveContent(context)
+                      : () {
+                          SnakBarUtils.showSnakbar(context, Icons.error_outline,
+                              "Please fill in the blanks");
+                        },
+                ),
               ],
             )
           ],

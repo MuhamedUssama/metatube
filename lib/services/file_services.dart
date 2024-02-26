@@ -72,6 +72,15 @@ class FileService {
     }
   }
 
+  void newFile(context) async {
+    _selectedFile = null;
+    textController.clear();
+    descriptionController.clear();
+    tagsController.clear();
+
+    SnakBarUtils.showSnakbar(context, Icons.upload_file, "New file created");
+  }
+
   static String getTodayDate() {
     final now = DateTime.now();
     final formatter = DateFormat("yyyy-MM-dd");
