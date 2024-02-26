@@ -72,7 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                MainButton(text: "New File", onPressed: () {}),
+                MainButton(
+                  text: "New File",
+                  onPressed: () => fileService.newFile(context),
+                ),
                 Row(
                   children: [
                     IconButtonWidget(
