@@ -13,10 +13,10 @@ abstract class AppTheme {
   static const TextStyle hintText = TextStyle(color: medium);
   static const TextStyle counterStyle = TextStyle(color: medium, fontSize: 14);
 
-  // static ElevatedButtonThemeData elevatedButtonThemeData =
-  //     ElevatedButtonThemeData(
-  //   style: ButtonStyle(
-  //     backgroundColor: MaterialStateProperty.all<Color>(accent),
-  //   ),
-  // );
+  static const TextStyle splashStyle = TextStyle(
+    color: accent,
+    fontSize: 60,
+    fontStyle: FontStyle.italic,
+    fontWeight: FontWeight.w500,
+  );
 }
