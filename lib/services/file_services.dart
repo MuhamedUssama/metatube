@@ -16,12 +16,13 @@ class FileService {
   String _selectedDirectory = "";
 
   void saveContent(context) async {
+    // we use context here as a parameter in this function because we use the Snackbar
     final title = textController.text;
     final discription = descriptionController.text;
     final tags = tagsController.text;
 
     final textContent =
-        "Title:\n\t$title\n\nDiscription:\n\t$discription\n\nTags:\n\t$tags\n";
+        "Title:\n\n$title\n\nDiscription:\n\n$discription\n\nTags:\n\n$tags";
 
     try {
       if (_selectedFile != null) {
@@ -41,6 +42,33 @@ class FileService {
           context, Icons.check_circle, "File Saved Successfully");
     } catch (e) {
       SnakBarUtils.showSnakbar(context, Icons.error_outline, "File Not Saved");
+    }
+  }
+
+  void loadFile(context) async {
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+      if (result != null) {
+        File file = File(result.files.single.path!);
+        _selectedFile = file;
+
+        final fileContent = await file.readAsString();
+
+        final lines = fileContent.split("\n\n");
+
+        textController.text = lines[1];
+        descriptionController.text = lines[3];
+        tagsController.text = lines[5];
+
+        SnakBarUtils.showSnakbar(context, Icons.upload_file, "File uploaded");
+      } else {
+        SnakBarUtils.showSnakbar(context, Icons.error_rounded,
+            "Somthing wrong, please try again later.");
+      }
+    } catch (e) {
+      SnakBarUtils.showSnakbar(
+          context, Icons.error_outline, "No file selected");
     }
   }
 
