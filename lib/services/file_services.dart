@@ -63,12 +63,12 @@ class FileService {
 
         SnakBarUtils.showSnakbar(context, Icons.upload_file, "File uploaded");
       } else {
-        SnakBarUtils.showSnakbar(context, Icons.error_rounded,
-            "Somthing wrong, please try again later.");
+        SnakBarUtils.showSnakbar(
+            context, Icons.error_rounded, "No file selected");
       }
     } catch (e) {
-      SnakBarUtils.showSnakbar(
-          context, Icons.error_outline, "No file selected");
+      SnakBarUtils.showSnakbar(context, Icons.error_outline,
+          "Somthing wrong, please try again later.");
     }
   }
 

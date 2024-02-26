@@ -73,14 +73,23 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 MainButton(text: "New File", onPressed: () {}),
-                const Row(
+                Row(
                   children: [
                     IconButtonWidget(
                       iconButton: Icons.file_upload,
+                      onPressed: fileService.fieldsNotEmpty
+                          ? () {
+                              SnakBarUtils.showSnakbar(
+                                  context,
+                                  Icons.warning_amber_rounded,
+                                  "Please delete text in fields first");
+                            }
+                          : () => fileService.loadFile(context),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     IconButtonWidget(
                       iconButton: Icons.folder,
+                      onPressed: () {},
                     ),
                   ],
                 ),
