@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(width: 8),
                     IconButtonWidget(
                       iconButton: Icons.folder,
-                      onPressed: () {},
+                      onPressed: () => fileService.newDirectory(context),
                     ),
                   ],
                 ),

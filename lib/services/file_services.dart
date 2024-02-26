@@ -78,7 +78,7 @@ class FileService {
     descriptionController.clear();
     tagsController.clear();
 
-    SnakBarUtils.showSnakbar(context, Icons.upload_file, "New file created");
+    SnakBarUtils.showSnakbar(context, Icons.folder, "New file created");
   }
 
   void newDirectory(context) async {
